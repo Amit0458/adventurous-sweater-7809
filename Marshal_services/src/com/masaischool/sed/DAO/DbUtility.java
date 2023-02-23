@@ -2,6 +2,7 @@ package com.masaischool.sed.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -35,10 +36,17 @@ public class DbUtility {
 	}
 	
 	static Connection getConnecton() throws SQLException {
+		
 		return DriverManager.getConnection(url, username, password);
 	}
 	
 	static void closeConnection(Connection object) throws SQLException {
+		
 		if(object != null) object.close();
+	}
+	
+	static boolean isResultSetEmpty(ResultSet resultSet) throws SQLException {
+
+		return (resultSet.isBeforeFirst() && resultSet.getRow() == 0) ? true : false;
 	}
 }
