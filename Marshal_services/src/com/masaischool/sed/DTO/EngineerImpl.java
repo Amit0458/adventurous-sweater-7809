@@ -3,45 +3,34 @@ package com.masaischool.sed.DTO;
 import java.util.Objects;
 
 public class EngineerImpl implements Engineer {
-	private Integer emp_id;
-	private String name;
-	private String email;
+	private Integer empId;
+	private String username;
 	private String password;
 	private String category;
 	
 	public EngineerImpl() {};
 	
-	public EngineerImpl(Integer emp_id, String name, String email, String password, String category) {
-		super();
-		this.emp_id = emp_id;
-		this.name = name;
-		this.email = email;
+	public EngineerImpl(Integer emp_id, String username, String password, String category) {
+		this.empId = emp_id;
+		this.username = username;
 		this.password = password;
 		this.category = category;
 	}
 
-	public Integer getEmp_id() {
-		return emp_id;
+	public Integer getEmpId() {
+		return empId;
 	}
 
-	public void setEmp_id(Integer emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpId(Integer emp_id) {
+		this.empId = emp_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserName(String email) {
+		this.username = email;
 	}
 
 	public String getPassword() {
@@ -62,7 +51,7 @@ public class EngineerImpl implements Engineer {
 
 	@Override
 	public int hashCode() {
-		return emp_id.hashCode();
+		return empId.hashCode();
 	}
 
 	@Override
@@ -74,12 +63,13 @@ public class EngineerImpl implements Engineer {
 		if (getClass() != obj.getClass())
 			return false;
 		EngineerImpl other = (EngineerImpl) obj;
-		return Objects.equals(emp_id, other.emp_id);
+		return Objects.equals(empId, other.empId);
 	}
 
 	@Override
 	public String toString() {
-		return "Employee_id = " + emp_id + ", Name = " + name + ",Email = " + email + ", Password = " + password
+		return "Employee_id = " + empId + ", username = " + username + ", Password = " + password
 				+ ", Category = " + category + "\n";
 	}
+
 }

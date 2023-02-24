@@ -3,8 +3,8 @@ package com.masaischool.sed.DTO;
 import java.time.LocalDate;
 
 public interface Complain {
-	public String getComplain_id();
-	public void setComplain_id(String complain_id);
+	public Integer getComplain_id();
+	public void setComplain_id(Integer complain_id);
 	public LocalDate getRegister_Date();
 	public void setRegister_Date(LocalDate register_Date);
 	public LocalDate getClosing_date();

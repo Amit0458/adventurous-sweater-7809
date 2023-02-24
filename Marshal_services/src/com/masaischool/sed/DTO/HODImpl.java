@@ -92,7 +92,4 @@ public class HODImpl implements HOD {
 				+ ", Incharge_of = " + incharge_of + ", Employee List = " + employeeList + "\n";
 	}
 	
-	
-	
-	
 }

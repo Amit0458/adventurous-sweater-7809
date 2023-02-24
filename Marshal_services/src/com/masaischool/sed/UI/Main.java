@@ -14,11 +14,7 @@ public class Main {
 	static String grettingMsg() {
 			LocalTime time = LocalTime.now();
 			int hours = 0;
-	        	try {
-					hours = time.getHour();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			hours = time.getHour();
 	        if(hours>=1 && hours<=12){
 	            return "Good Mooring"; 
 	        }else if(hours>=12 && hours<=16){
@@ -79,11 +75,11 @@ public class Main {
 					System.out.println("Thank you, Have a nice day");
 					break;
 				case 1:
-					try {
-						hod.addNewEngineer(new EngineerImpl());
-					}catch(SomeThingWrongException ex) {
-						
-					}
+//					try {
+//						
+//					}catch(SomeThingWrongException ex) {
+//						
+//					}
 					break;
 				case 2:
 					
