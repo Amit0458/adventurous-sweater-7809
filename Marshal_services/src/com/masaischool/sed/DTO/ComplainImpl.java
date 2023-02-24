@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ComplainImpl implements Complain {
-	private String complain_id;
+	private Integer complain_id;
 	private LocalDate register_Date;
 	private LocalDate closing_date;
 	private String complain_desc;
@@ -14,18 +14,18 @@ public class ComplainImpl implements Complain {
 	
 	public ComplainImpl() {};
 	
-	public ComplainImpl(String complain_id, LocalDate register_Date, String complain_desc) {
+	public ComplainImpl(Integer complain_id, LocalDate register_Date, String complain_desc) {
 		super();
 		this.complain_id = complain_id;
 		this.register_Date = register_Date;
 		this.complain_desc = complain_desc;
 	}
 
-	public String getComplain_id() {
+	public Integer getComplain_id() {
 		return complain_id;
 	}
-
-	public void setComplain_id(String complain_id) {
+	
+	public void setComplain_id(Integer complain_id) {
 		this.complain_id = complain_id;
 	}
 
@@ -97,8 +97,7 @@ public class ComplainImpl implements Complain {
 	@Override
 	public String toString() {
 		return "Complain_id = " + complain_id + ", Register_Date = " + register_Date + ", Closing_date = "
-				+ closing_date + ", Complain_desc = " + complain_desc + ", complain_status = " + complain_status
-				+ assigned_eng.toString() + " " + raised_by.toString() + "\n";
+				+ closing_date + ", Complain_desc = " + complain_desc + ", complain_status = " + complain_status + "\n";
 	}
 	
 	
