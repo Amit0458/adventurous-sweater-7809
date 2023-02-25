@@ -9,6 +9,8 @@ public class ComplainImpl implements Complain {
 	private LocalDate closing_date;
 	private String complain_desc;
 	private String complain_status;
+	private String enggName;
+	private String employeeName;
 	private Engineer assigned_eng;
 	private Employee raised_by;
 	
@@ -68,6 +70,22 @@ public class ComplainImpl implements Complain {
 	public void setAssigned_eng(Engineer assigned_eng) {
 		this.assigned_eng = assigned_eng;
 	}
+	
+	public String getEnggName() {
+		return enggName;
+	}
+
+	public void setEnggName(String enggName) {
+		this.enggName = enggName;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 
 	public Employee getRaised_by() {
 		return raised_by;
@@ -76,6 +94,8 @@ public class ComplainImpl implements Complain {
 	public void setRaised_by(Employee raised_by) {
 		this.raised_by = raised_by;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -96,9 +116,10 @@ public class ComplainImpl implements Complain {
 
 	@Override
 	public String toString() {
-		return "Complain_id = " + complain_id + ", Register_Date = " + register_Date + ", Closing_date = "
-				+ closing_date + ", Complain_desc = " + complain_desc + ", complain_status = " + complain_status + "\n";
+		return "ID: " + complain_id + ", Register on: " + register_Date + ", Problem: " + complain_desc + ", Raised By: " + employeeName  +", Assigned to: "+ enggName +", Status: " + complain_status + "\n";
 	}
+
+	
 	
 	
 	

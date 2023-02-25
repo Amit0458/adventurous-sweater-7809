@@ -1,8 +1,9 @@
 package com.masaischool.sed.DTO;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
-public interface registerdEngineer {
+public interface RegisterdEngineer {
 	public Integer getEmp_id();
 	public void setEmp_id(Integer emp_id);
 	public String getUsername();
