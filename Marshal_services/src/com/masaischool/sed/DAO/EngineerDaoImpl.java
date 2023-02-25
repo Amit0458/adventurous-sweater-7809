@@ -13,7 +13,44 @@ import com.masaischool.sed.Exceptions.NoRecordFoundException;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
 
 public class EngineerDaoImpl implements EngineerDao {
+	
+	@Override
+	public boolean engineerLogin(String username, String password) throws SomeThingWrongException {
+		Connection connection = null;
+		boolean result = false;
+		try {
+			//get connection
+			connection = DbUtility.getConnecton();
+			
+			//Prepare query
+			String SELECT_QUERY = "SELECT * FROM Engineers WHERE user_name = ? AND password = ?";
+			PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
+			
+			prepStatment.setString(1, username);
+			prepStatment.setString(2, password);
 
+			
+			ResultSet rs = prepStatment.executeQuery();
+			
+			if(DbUtility.isResultSetEmpty(rs)) {
+			
+			}else {
+				result = true;
+				rs.next();
+				LoggedINUser.loggedInUSerId = rs.getInt("emp_id");
+			}
+			
+		}catch(SQLException ex) {
+			throw new SomeThingWrongException();
+		}finally {
+			try {
+				DbUtility.closeConnection(connection);
+			}catch(SQLException ex) {
+				throw new SomeThingWrongException();
+			}
+		}
+		return result;
+	}
 	@Override
 	public List<Complain> showAssignedProblems(Integer empId) throws SomeThingWrongException, NoRecordFoundException {
 		
@@ -24,7 +61,13 @@ public class EngineerDaoImpl implements EngineerDao {
 			connection = DbUtility.getConnecton();
 			
 			//Prepare query
-			String SELECT_QUERY = "SELECT * FROM Complains WHERE Status = 'Panding' AND assign_to = ? ";
+			String SELECT_QUERY = "SELECT C.comp_id ID, C.reg_date Registered,"
+					+ " C.comp_desc Problem, E2.emp_name RaisedBy,"
+					+ " E.emp_name Engineer, C.closing_date closing,"
+					+ " C.Status Status FROM Complains C "
+					+ "INNER JOIN employees E ON C.assign_to = E.emp_id "
+					+ "INNER JOIN Employees E2 ON C.raised_by = E2.emp_id WHERE\r\n"
+					+ "C.assign_to = ? && C.status = 'panding'";
 			
 			PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
 			
@@ -52,7 +95,7 @@ public class EngineerDaoImpl implements EngineerDao {
 	}
 		
 	@Override
-	public void updateStatusOfComaplain(String complainId, String status, LocalDate date) throws SomeThingWrongException, NoRecordFoundException {
+	public void updateStatusOfComaplain(Integer complainId, String status) throws SomeThingWrongException, NoRecordFoundException {
 
 		Connection connection = null;
 		try {
@@ -65,8 +108,8 @@ public class EngineerDaoImpl implements EngineerDao {
 			PreparedStatement prepStatment = connection.prepareStatement(UPDATE_QUERY);
 			
 			prepStatment.setString(1, status);
-			prepStatment.setDate(2, Date.valueOf(date));
-			prepStatment.setString(3, complainId);
+			prepStatment.setDate(2, Date.valueOf(LocalDate.now()));
+			prepStatment.setInt(3, complainId);
 			
 			
 			int response= prepStatment.executeUpdate();
@@ -95,7 +138,13 @@ public class EngineerDaoImpl implements EngineerDao {
 			connection = DbUtility.getConnecton();
 			
 			//Prepare query
-			String SELECT_QUERY = "SELECT * FROM Complains WHERE assign_to = ?";
+			String SELECT_QUERY = "SELECT C.comp_id ID, "
+					+ "C.reg_date Registered, C.comp_desc Problem, "
+					+ "E2.emp_name RaisedBy, E.emp_name Engineer, "
+					+ "C.closing_date closing, C.Status Status FROM Complains C "
+					+ "INNER JOIN employees E ON C.assign_to = E.emp_id "
+					+ "INNER JOIN Employees E2 ON C.raised_by = E2.emp_id WHERE\r\n"
+					+ "C.assign_to = ?";
 			
 			PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
 			
@@ -139,7 +188,7 @@ public class EngineerDaoImpl implements EngineerDao {
 				prepStatment.setString(2, userName);
 				
 				
-				int response= prepStatment.executeUpdate();
+				int response = prepStatment.executeUpdate();
 				
 				
 				if(response == 0) {
@@ -191,21 +240,4 @@ public class EngineerDaoImpl implements EngineerDao {
 		
 		return result;
 	}
-	
-		public static void main(String[] args) {
-		
-		EngineerDao hod = new EngineerDaoImpl();
-		
-		try {
-			
-			List<Complain> list  =  hod.showAllComplains(2);
-//			hod.changePassword("RBR0678SWE","raghbir0678","raghbir6789");
-			list.forEach(i -> System.out.println(i));
-		}catch(Exception ex) {
-			System.out.println(ex);
-		}
-		
-		
-	}
-	
 }

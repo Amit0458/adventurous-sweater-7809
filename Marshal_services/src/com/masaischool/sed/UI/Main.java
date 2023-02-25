@@ -3,14 +3,20 @@ package com.masaischool.sed.UI;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+import com.masaischool.sed.DAO.EngineerDao;
 import com.masaischool.sed.DAO.HodDao;
 import com.masaischool.sed.DAO.HodDaoImpl;
+import com.masaischool.sed.DAO.LoggedINUser;
 import com.masaischool.sed.DTO.EngineerImpl;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
 
 
 public class Main {
-	static HodDao hod =  new HodDaoImpl();
+	
+	private static HodUI hodUi;
+	private static EnginnerUI engineerUi;
+	public static Scanner sc;
+	
 	static String grettingMsg() {
 			LocalTime time = LocalTime.now();
 			int hours = 0;
@@ -33,7 +39,9 @@ public class Main {
 		System.out.println("2. View all Engineers");
 		System.out.println("3. Delete a Engineer");
 		System.out.println("4. View all raise complains");
-		System.out.println("5. Assign Compllain to Enginner");
+		System.out.println("5. View new raise complains");
+		System.out.println("6. Assign Compllain to Enginner");
+		System.out.println("7. Log out");
 	}
 	static void displayEngineerMenu() {
 		System.out.println("1. View assigned complains");
@@ -48,7 +56,7 @@ public class Main {
 		System.out.println("4. Change password");
 	}
 	
-	static void HodLogin(Scanner sc) {
+	static void adminLogin(Scanner sc) {
 		System.out.println("Enter username ");
 		String username = sc.next();
 		System.out.println("Enter password ");
@@ -63,7 +71,7 @@ public class Main {
 	}
 	static void HodMenu(Scanner sc) {
 		int choice = 0;
-		System.out.println("Welcome " + grettingMsg());
+		System.out.println("Welcome " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + grettingMsg());
 		do {
 			
 			displayHODMenu();
@@ -75,22 +83,57 @@ public class Main {
 					System.out.println("Thank you, Have a nice day");
 					break;
 				case 1:
-//					try {
-//						
-//					}catch(SomeThingWrongException ex) {
-//						
-//					}
+					hodUi.addEngineer();
 					break;
 				case 2:
-					
+					hodUi.showAllEnginers();
 					break;
 				case 3:
-					
+					hodUi.deleteEnginner();
 					break;
 				case 4:
-					
+					hodUi.showAllRaisedComplians();
 					break;
 				case 5:
+					hodUi.showNewRaisedComplians();
+					break;
+				case 6:
+					hodUi.assignEnginner();
+					break;
+				case 7:
+					hodUi.hodLogOut();;
+					break;
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + choice);
+			}
+		
+		}while(choice != 0);
+		
+	}
+	
+	static void EngineerMenu(Scanner sc) {
+		int choice = 0;
+		System.out.println("Welcome " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + grettingMsg());
+		do {
+			
+			displayEngineerMenu();
+			System.out.println("Enter selection ");
+			choice = sc.nextInt();
+			
+			switch (choice) {
+				case 0:
+					System.out.println("Thank you, Have a nice day");
+					break;
+				case 1:
+					engineerUi.showAssignedComplains();
+					break;
+				case 2:
+					engineerUi.updateStatus();
+					break;
+				case 3:
+					engineerUi.showAllComplains();
+					break;
+				case 4:
 					
 					break;
 				default:
@@ -100,12 +143,11 @@ public class Main {
 		}while(choice != 0);
 		
 	}
-	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
+	
+	public static void mainMenu(Scanner sc) {
 		int choice = 0;
 		do {
-			System.out.println(" 1. Hod Login \n 2. Enginner Login \n 3. Employee Login \n 4. Employee Regitration \n 0. Exit ");
+			System.out.println("1. Hod Login \n2. Enginner Login \n3. Employee Login \n4. Employee Regitration \n0. Exit ");
 			choice = sc.nextInt();
 			
 			switch(choice) {
@@ -113,10 +155,10 @@ public class Main {
 					System.out.println("Thank you, Visit again");
 					break;
 				case 1:
-					HodLogin(sc);
+					hodUi.HodLogin();
 					break;
 				case 2:
-					
+					engineerUi.enginnerLogin();
 					break;
 				case 3:
 					
@@ -128,7 +170,14 @@ public class Main {
 					System.out.println("Invalid Selection, try again");
 			}
 		}while(choice != 0);
+	}
+	public static void main(String[] args) {
 		
+		sc = new Scanner(System.in);
+		hodUi = new HodUI(sc);
+		engineerUi = new EnginnerUI(sc);
+		
+		mainMenu(sc);
 		
 		sc.close();
 

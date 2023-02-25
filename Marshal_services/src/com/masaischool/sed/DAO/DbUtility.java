@@ -58,17 +58,26 @@ public class DbUtility {
 		
 		while(rs.next()) {
 			Complain comp = new ComplainImpl();
-			comp.setComplain_id(rs.getInt("comp_id"));
-			comp.setRegister_Date(rs.getDate("reg_date").toLocalDate());
-			comp.setComplain_desc(rs.getString("comp_desc"));
+			comp.setComplain_id(rs.getInt("ID"));
+			comp.setRegister_Date(rs.getDate("Registered").toLocalDate());
+			comp.setComplain_desc(rs.getString("Problem"));
+			comp.setEmployeeName(rs.getString("RaisedBy"));
 			comp.setComplain_status("Panding");
-			if(rs.getDate("closing_date") != null)  {
-				comp.setClosing_date(rs.getDate("closing_date").toLocalDate());
+			comp.setEnggName(rs.getString("Engineer"));
+//			System.out.println(rs.getString("Engineer"));
+//			if(rs.getString("Engineer") != null) {
+//				
+//			}
+			if(rs.getDate("closing") != null)  {
+				comp.setClosing_date(rs.getDate("closing").toLocalDate());
 			}
+			
 			
 			list.add(comp);
 		}
 		
 		return list;
 	}
+	
+	
 }
