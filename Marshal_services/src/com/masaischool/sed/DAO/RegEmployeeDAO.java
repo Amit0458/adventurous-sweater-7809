@@ -8,7 +8,7 @@ import com.masaischool.sed.Exceptions.NoRecordFoundException;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
 
 public interface RegEmployeeDAO {
-	public void registreEmployee(RegisterdEmployee eng) throws SomeThingWrongException;
+	public boolean registreEmployee(RegisterdEmployee eng) throws SomeThingWrongException;
 	public boolean employeeLogin(String username, String password) throws SomeThingWrongException, NoRecordFoundException;
 	public void registerComplain(Complain comp) throws SomeThingWrongException;
 	public Complain checkStatus(Integer complainId) throws SomeThingWrongException, NoRecordFoundException;

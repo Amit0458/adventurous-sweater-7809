@@ -70,8 +70,8 @@ public class RegisteredEmployeeImpl implements RegisterdEmployee {
 
 	@Override
 	public String toString() {
-		return "Registered Engineer " + emp_id + ", username=" + username + ", password=" + password
-				+ ", regdate=" + regdate + "\n";
+		return " ID " + emp_id + ", User Name : " + username + ", Password : " + password
+				+ "\n";
 	}
 	
 	

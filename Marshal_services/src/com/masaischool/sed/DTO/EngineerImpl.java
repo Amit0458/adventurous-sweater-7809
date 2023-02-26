@@ -68,8 +68,8 @@ public class EngineerImpl implements Engineer {
 
 	@Override
 	public String toString() {
-		return "Employee_id = " + empId + ", username = " + username + ", Password = " + password
-				+ ", Category = " + category + "\n";
+		return " ID " + empId + ", User Name : " + username + ", Password : " + password
+				+ ", Category : " + category + "\n";
 	}
 
 }
