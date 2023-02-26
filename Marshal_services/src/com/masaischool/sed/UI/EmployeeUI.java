@@ -76,7 +76,9 @@ public class EmployeeUI {
 		try {
 			System.out.println("Enter complian ID");
 			Integer complainId = sc.nextInt();
-			System.out.println(regemployeeDao.checkStatus(complainId)); 
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.print(regemployeeDao.checkStatus(complainId)); 
+			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -85,9 +87,9 @@ public class EmployeeUI {
 	public void showAllComplains() {
 		try {
 			List<Complain> list = regemployeeDao.showAllComplain();
-			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
-			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -111,12 +113,12 @@ public class EmployeeUI {
 		if(newPassword.equals(sc.next())) {
 			try {
 				regemployeeDao.changePassword(username, olsPassword, newPassword);
-				System.out.println("Password changed Succesfully");
+				System.out.println("\tPassword changed Succesfully");
 			}catch(SomeThingWrongException | NoRecordFoundException ex) {
 				System.out.println(ex);
 			}
 		}else {
-			System.out.println("Password doens't matches");
+			System.out.println("\tPassword doens't matches");
 			changePassword();
 		}
 		

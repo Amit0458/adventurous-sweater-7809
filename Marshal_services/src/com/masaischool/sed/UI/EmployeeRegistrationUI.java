@@ -29,7 +29,7 @@ public class EmployeeRegistrationUI {
 			System.out.println("Please Enter Employee Id");
 			empID = sc.nextInt();
 			System.out.println("Enter a username");
-			username = sc.next();
+			username = sc.next()+"";
 			System.out.println("Enter new password");
 			password = sc.next()+"";
 			System.out.println("Confirm password");
@@ -41,16 +41,20 @@ public class EmployeeRegistrationUI {
 			RegisterdEmployee newEmployee = new RegisteredEmployeeImpl();
 			newEmployee.setEmp_id(empID);
 			newEmployee.setUsername(username);
-			newEmployee.setPassword(confirmPassword);
+			newEmployee.setPassword(password);
 			newEmployee.setRegdate(LocalDate.now());
 			try {
-				regemployeeDao.registreEmployee(newEmployee);
-				System.out.println(LoggedINUser.getUserName(empID) + " Registered Succesfully, With usernmae : " + username + "and password : " + password);
+				if(regemployeeDao.registreEmployee(newEmployee)) {
+				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println(LoggedINUser.getUserName(empID) + " Registered Succesfully, With usernmae : " + username + " and password : " + password);
+				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
+				}
 			}catch(SomeThingWrongException ex) {
-				System.out.println(ex);
+				System.out.println("User Name must be unique");
 			}
 		}else {
-			System.out.println("Please check password");
+			System.out.println("\tPlease check password");
+			registerEmployee();
 		}	
 	}
 }

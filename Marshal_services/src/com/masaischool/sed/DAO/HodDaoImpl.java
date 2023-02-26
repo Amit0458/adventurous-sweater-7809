@@ -34,12 +34,12 @@ public class HodDaoImpl implements HodDao {
 			
 			ResultSet rs = prepStatment.executeQuery();
 			
-			if(DbUtility.isResultSetEmpty(rs)) {
-			
-			}else {
+			if(!DbUtility.isResultSetEmpty(rs)) {
 				result = true;
 				rs.next();
 				LoggedINUser.loggedInUSerId = rs.getInt("emp_id");
+			}else {
+				
 			}
 			
 		}catch(SQLException ex) {

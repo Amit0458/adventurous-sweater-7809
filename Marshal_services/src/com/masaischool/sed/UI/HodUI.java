@@ -68,7 +68,10 @@ public class HodUI {
 	public void showAllEnginers() {
 		try {
 			List<Engineer> list = HOD.showAllEnginners();
+			System.out.println("----------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
+			System.out.println("----------------------------------------------------------------------------------------------------------");
+
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
