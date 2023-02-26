@@ -1,6 +1,6 @@
 package com.masaischool.sed.UI;
 
-import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class HodUI {
 			}else {
 				System.out.println("Wrong Credentials");
 			}
-		}catch(SomeThingWrongException ex) {
+		}catch(SomeThingWrongException | InputMismatchException ex) {
 			
 		}
 	}
@@ -56,7 +56,9 @@ public class HodUI {
 		}
 		try {
 			HOD.addNewEngineer(engineer);
-			System.out.println("Enginner added succefully");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println(LoggedINUser.getUserName(engineer.getEmpId()) + " Registered Succesfully, usernmae : " + engineer.getUserName() + ", password : " + engineer.getPassword());
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		}catch(SomeThingWrongException ex) {
 			System.out.println(ex);
 		}
@@ -66,8 +68,8 @@ public class HodUI {
 	public void showAllEnginers() {
 		try {
 			List<Engineer> list = HOD.showAllEnginners();
-			list.forEach(System.out :: println);
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+			list.forEach(System.out :: print);
+		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
@@ -77,7 +79,7 @@ public class HodUI {
 			System.out.println("Enter Enginner Id");
 			HOD.deleteEnginner(sc.nextInt());
 			System.out.println("Enginner deleted Succesfully");
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
@@ -85,7 +87,10 @@ public class HodUI {
 	public void showAllRaisedComplians() {
 		try {
 			List<Complain> list = HOD.showAllComplins();
-			list.forEach(System.out :: println);
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			list.forEach(System.out :: print);
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -94,8 +99,10 @@ public class HodUI {
 	public void showNewRaisedComplians() {
 		try {
 			List<Complain> list = HOD.showRaisedComplains();
-			list.forEach(System.out :: println);
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			list.forEach(System.out :: print);
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
@@ -107,13 +114,19 @@ public class HodUI {
 			System.out.println("Enter Enginner Id");
 			Integer enggId = sc.nextInt();
 			HOD.assignEnginner(compId, enggId);
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println("Enginner assigned, Complain Id : "+ compId +" Enginner : " + LoggedINUser.getUserName(enggId) + " Succesfully");
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
 	
 	public void hodLogOut() {
-		HOD.Hodlogout(sc);
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		System.out.println("\t\t\t\t\tBye Bye, " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + Main.grettingMsgforLogout());
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		HOD.Hodlogout();
+		System.exit(0);
 	}
 }

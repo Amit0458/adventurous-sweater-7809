@@ -11,6 +11,7 @@ import java.util.List;
 import com.masaischool.sed.DTO.Complain;
 import com.masaischool.sed.Exceptions.NoRecordFoundException;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
+import com.masaischool.sed.UI.Main;
 
 public class EngineerDaoImpl implements EngineerDao {
 	
@@ -173,16 +174,26 @@ public class EngineerDaoImpl implements EngineerDao {
 
 	@Override
 	public void changePassword(String userName, String oldPassword, String neWpassword) throws SomeThingWrongException, NoRecordFoundException {
-		if(checkOldPassword(userName, oldPassword)) {
 			Connection connection = null;
 			try {
 				//get connection
 				connection = DbUtility.getConnecton();
 				
+				String SELECT_QUERY = "SELECT * FROM Engineers WHERE user_name = ? And password = ? ";
+				
+				PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
+				
 				//Prepare query
+				prepStatment.setString(1, userName);
+				prepStatment.setString(2, oldPassword);
+				
+				
+				ResultSet rs = prepStatment.executeQuery();
+				if(!DbUtility.isResultSetEmpty(rs)) {
+					
 				String UPDATE_QUERY = "UPDATE Engineers SET password = ? WHERE user_name = ?";
 				
-				PreparedStatement prepStatment = connection.prepareStatement(UPDATE_QUERY);
+				prepStatment = connection.prepareStatement(UPDATE_QUERY);
 				
 				prepStatment.setString(1, neWpassword);
 				prepStatment.setString(2, userName);
@@ -190,9 +201,11 @@ public class EngineerDaoImpl implements EngineerDao {
 				
 				int response = prepStatment.executeUpdate();
 				
-				
 				if(response == 0) {
 					throw new NoRecordFoundException("No such complain found, please check complainID");
+				}
+				}else {
+					throw new NoRecordFoundException("Wrong password");
 				}
 			}catch(SQLException ex) {
 				throw new SomeThingWrongException();
@@ -203,41 +216,12 @@ public class EngineerDaoImpl implements EngineerDao {
 					throw new SomeThingWrongException();
 				}
 			}
-		}else {
-			throw new NoRecordFoundException("Wrong password");
-		}
+		
 	}
 	
-	private boolean checkOldPassword(String userName, String password) throws SomeThingWrongException {
-		Connection connection = null;
-		boolean result = true;
-		try {
-			//get connection
-			connection = DbUtility.getConnecton();
-			
-			//Prepare query
-			String SELECT_QUERY = "SELECT * FROM Engineers WHERE user_name = ? And password = ? ";
-			
-			PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
-			
-			prepStatment.setString(1, userName);
-			prepStatment.setString(2, password);
-			
-			ResultSet rs = prepStatment.executeQuery();
-			
-			if(DbUtility.isResultSetEmpty(rs)) {
-				result = false;
-			}
-			
-		}catch(SQLException ex) {
-			throw new SomeThingWrongException();
-		}finally {
-			try {
-				DbUtility.closeConnection(connection);
-			}catch(SQLException ex) {
-			}
-		}
-		
-		return result;
+	@Override
+	public void enigineerLogout() {
+		LoggedINUser.loggedInUSerId = 0;
+		Main.mainMenu();
 	}
 }

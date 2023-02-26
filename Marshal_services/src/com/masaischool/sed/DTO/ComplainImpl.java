@@ -11,8 +11,8 @@ public class ComplainImpl implements Complain {
 	private String complain_status;
 	private String enggName;
 	private String employeeName;
-	private Engineer assigned_eng;
-	private Employee raised_by;
+	private Integer assigned_eng;
+	private Integer raised_by;
 	
 	public ComplainImpl() {};
 	
@@ -63,11 +63,11 @@ public class ComplainImpl implements Complain {
 		this.complain_status = complain_status;
 	}
 
-	public Engineer getAssigned_eng() {
+	public Integer getAssigned_eng() {
 		return assigned_eng;
 	}
 
-	public void setAssigned_eng(Engineer assigned_eng) {
+	public void setAssigned_eng(Integer assigned_eng) {
 		this.assigned_eng = assigned_eng;
 	}
 	
@@ -87,11 +87,11 @@ public class ComplainImpl implements Complain {
 		this.employeeName = employeeName;
 	}
 
-	public Employee getRaised_by() {
+	public Integer getRaised_by() {
 		return raised_by;
 	}
 
-	public void setRaised_by(Employee raised_by) {
+	public void setRaised_by(Integer raised_by) {
 		this.raised_by = raised_by;
 	}
 	
@@ -116,7 +116,7 @@ public class ComplainImpl implements Complain {
 
 	@Override
 	public String toString() {
-		return "ID: " + complain_id + ", Register on: " + register_Date + ", Problem: " + complain_desc + ", Raised By: " + employeeName  +", Assigned to: "+ enggName +", Status: " + complain_status + "\n";
+		return "\tID : " + complain_id +", Registered on : " + register_Date + ", Problem : " + complain_desc +", Raised by : " + employeeName  +", Enginner : "+ enggName +", Closing Date : " + closing_date + ", Status : " + complain_status + "\n";
 	}
 
 	

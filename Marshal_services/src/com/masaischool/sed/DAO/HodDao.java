@@ -1,7 +1,6 @@
 package com.masaischool.sed.DAO;
 
 import java.util.List;
-import java.util.Scanner;
 
 import com.masaischool.sed.DTO.Complain;
 import com.masaischool.sed.DTO.Engineer;
@@ -10,7 +9,7 @@ import com.masaischool.sed.Exceptions.SomeThingWrongException;
 
 public interface HodDao {
 	public boolean hodLogin(String username, String password) throws SomeThingWrongException;
-	public void Hodlogout(Scanner sc);
+	public void Hodlogout();
 	public boolean addNewEngineer(Engineer eng) throws SomeThingWrongException;
 	public List<Engineer> showAllEnginners() throws SomeThingWrongException,NoRecordFoundException;
 	public boolean deleteEnginner(Integer eng_id) throws SomeThingWrongException,NoRecordFoundException;

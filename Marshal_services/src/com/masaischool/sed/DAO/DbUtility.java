@@ -62,12 +62,8 @@ public class DbUtility {
 			comp.setRegister_Date(rs.getDate("Registered").toLocalDate());
 			comp.setComplain_desc(rs.getString("Problem"));
 			comp.setEmployeeName(rs.getString("RaisedBy"));
-			comp.setComplain_status("Panding");
+			comp.setComplain_status(rs.getString("Status"));
 			comp.setEnggName(rs.getString("Engineer"));
-//			System.out.println(rs.getString("Engineer"));
-//			if(rs.getString("Engineer") != null) {
-//				
-//			}
 			if(rs.getDate("closing") != null)  {
 				comp.setClosing_date(rs.getDate("closing").toLocalDate());
 			}
