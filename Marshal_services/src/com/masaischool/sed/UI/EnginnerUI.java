@@ -1,5 +1,6 @@
 package com.masaischool.sed.UI;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,15 +31,17 @@ public class EnginnerUI {
 			}else {
 				System.out.println("Wrong Credentials");
 			}
-		}catch(SomeThingWrongException ex) {
-			
+		}catch(SomeThingWrongException | InputMismatchException ex) {
+			System.out.println(ex);
 		}
 	}
 	
 	public void showAssignedComplains() {
 		try {
 			List<Complain> list = engineer.showAssignedProblems(LoggedINUser.loggedInUSerId);
-			list.forEach(System.out :: println);
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			list.forEach(System.out :: print);
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -58,7 +61,7 @@ public class EnginnerUI {
 		try {
 			engineer.updateStatusOfComaplain(compID, status);
 			System.out.println("Status Updated");
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+		}catch(SomeThingWrongException | NoRecordFoundException| InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
@@ -66,9 +69,41 @@ public class EnginnerUI {
 	public void showAllComplains() {
 		try {
 			List<Complain> list = engineer.showAllComplains(LoggedINUser.loggedInUSerId);
-			list.forEach(System.out :: println);
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			list.forEach(System.out :: print);
+			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
+	}
+	
+	public void changePassword() {
+		System.out.println("Enter username ");
+		String username = sc.next();
+		System.out.println("Enter old password ");
+		String olsPassword = sc.next();
+		System.out.println("Enter new password ");
+		String newPassword = sc.next();
+		System.out.println("Confirm password ");
+		if(newPassword.equals(sc.next())) {
+			try {
+				engineer.changePassword(username, olsPassword, newPassword);
+				System.out.println("Password changed Succesfully");
+			}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
+				System.out.println(ex);
+			}
+		}else {
+			System.out.println("Password doens't matches");
+			changePassword();
+		}
+		
+	}
+	
+	public void engineerLogOut() {
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		System.out.println("\t\t\t\t\tBye Bye, " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + Main.grettingMsgforLogout());
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		engineer.enigineerLogout();
+		System.exit(0);
 	}
 }

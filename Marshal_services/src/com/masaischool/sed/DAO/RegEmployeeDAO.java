@@ -1,15 +1,19 @@
 package com.masaischool.sed.DAO;
 
+import java.util.List;
+
 import com.masaischool.sed.DTO.Complain;
-import com.masaischool.sed.DTO.Engineer;
-import com.masaischool.sed.DTO.RegisterdEngineer;
+import com.masaischool.sed.DTO.RegisterdEmployee;
 import com.masaischool.sed.Exceptions.NoRecordFoundException;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
 
 public interface RegEmployeeDAO {
-	public void registreEmployee(RegisterdEngineer eng) throws SomeThingWrongException;
-	public void employeeLogin(String username, String password) throws SomeThingWrongException, NoRecordFoundException;
+	public void registreEmployee(RegisterdEmployee eng) throws SomeThingWrongException;
+	public boolean employeeLogin(String username, String password) throws SomeThingWrongException, NoRecordFoundException;
 	public void registerComplain(Complain comp) throws SomeThingWrongException;
-	
+	public Complain checkStatus(Integer complainId) throws SomeThingWrongException, NoRecordFoundException;
+	public List<Complain> showAllComplain() throws SomeThingWrongException, NoRecordFoundException;
+	public void changePassword(String userName, String oldPassword, String neWpassword) throws SomeThingWrongException, NoRecordFoundException;
+	public void enigineerLogout();
 	
 }

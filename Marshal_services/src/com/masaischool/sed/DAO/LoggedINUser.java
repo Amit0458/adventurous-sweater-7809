@@ -43,7 +43,7 @@ public class LoggedINUser {
 		return result;
 	}
 	
-	static int complainId = 0;
+	public static Integer complainId = 0;
 	
 	static {
 		

@@ -6,13 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.masaischool.sed.DTO.Complain;
-import com.masaischool.sed.DTO.ComplainImpl;
 import com.masaischool.sed.DTO.Engineer;
 import com.masaischool.sed.DTO.EngineerImpl;
-import com.masaischool.sed.DTO.HOD;
 import com.masaischool.sed.Exceptions.NoRecordFoundException;
 import com.masaischool.sed.Exceptions.SomeThingWrongException;
 import com.masaischool.sed.UI.Main;
@@ -57,9 +54,9 @@ public class HodDaoImpl implements HodDao {
 		return result;
 	}
 	@Override
-	public void Hodlogout(Scanner sc) {
+	public void Hodlogout() {
 		LoggedINUser.loggedInUSerId = 0;
-		Main.mainMenu(sc);
+		Main.mainMenu();
 	}
 	@Override
 	public boolean addNewEngineer(Engineer eng) throws SomeThingWrongException {

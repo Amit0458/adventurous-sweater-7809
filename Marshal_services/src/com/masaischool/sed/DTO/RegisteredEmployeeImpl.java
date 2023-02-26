@@ -3,16 +3,16 @@ package com.masaischool.sed.DTO;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class RegisteredEngineerImpl implements RegisterdEngineer {
+public class RegisteredEmployeeImpl implements RegisterdEmployee {
 
 	private Integer emp_id;
 	private String username;
 	private String password;
 	private LocalDate regdate;
 	
-	public RegisteredEngineerImpl() {};
+	public RegisteredEmployeeImpl() {};
 	
-	public RegisteredEngineerImpl(Integer emp_id, String username, String password, LocalDate regdate) {
+	public RegisteredEmployeeImpl(Integer emp_id, String username, String password, LocalDate regdate) {
 		this.emp_id = emp_id;
 		this.username = username;
 		this.password = password;
@@ -64,7 +64,7 @@ public class RegisteredEngineerImpl implements RegisterdEngineer {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RegisteredEngineerImpl other = (RegisteredEngineerImpl) obj;
+		RegisteredEmployeeImpl other = (RegisteredEmployeeImpl) obj;
 		return Objects.equals(emp_id, other.emp_id);
 	}
 
