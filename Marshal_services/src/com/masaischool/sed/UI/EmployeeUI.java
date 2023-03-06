@@ -29,6 +29,9 @@ public class EmployeeUI {
 		String password = sc.next();
 		try {
 			if(regemployeeDao.employeeLogin(username, password)) {
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
+				System.out.println("\t\t\t\t\tWelcome, " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + Main.grettingMsg()+"!\t\t\t\t\t|");
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
 				Main.EmployeMenu();
 			}else {
 				System.out.println("Wrong Credentials");
@@ -65,7 +68,7 @@ public class EmployeeUI {
 			System.out.println("----------------------------------------------------------------------------------------------");
 			System.out.println("Complaine registered succesfully, With complian ID : " + newComplain.getComplain_id());
 			System.out.println("----------------------------------------------------------------------------------------------");
-
+			Main.EmployeMenu();
 		}catch(SomeThingWrongException ex) {
 			System.out.println(ex);
 		}
@@ -79,6 +82,7 @@ public class EmployeeUI {
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.print(regemployeeDao.checkStatus(complainId)); 
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			Main.EmployeMenu();
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -90,7 +94,8 @@ public class EmployeeUI {
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		}catch(SomeThingWrongException | NoRecordFoundException ex) {
+			Main.EmployeMenu();
+		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
 	}
@@ -114,7 +119,8 @@ public class EmployeeUI {
 			try {
 				regemployeeDao.changePassword(username, olsPassword, newPassword);
 				System.out.println("\tPassword changed Succesfully");
-			}catch(SomeThingWrongException | NoRecordFoundException ex) {
+				Main.EmployeMenu();
+			}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 				System.out.println(ex);
 			}
 		}else {

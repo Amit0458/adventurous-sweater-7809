@@ -26,13 +26,13 @@ public class RegEmployeeSDAOImpl implements RegEmployeeDAO {
 			connection = DbUtility.getConnecton();
 
 			String SELECT_QUERY = "SELECT * FROM regEmployees WHERE emp_id = ?";
-
+			
 			PreparedStatement prepStatment = connection.prepareStatement(SELECT_QUERY);
 			
 			prepStatment.setInt(1, eng.getEmp_id());
 			
 			ResultSet rs = prepStatment.executeQuery();
-			
+			// if employee is not registered
 			if (DbUtility.isResultSetEmpty(rs)) {
 				// Prepare query
 				String INSERT_QUERY = "INSERT INTO regemployees (emp_id, usrename, password, rigister_date) VALUES (?,?,?,?)";
@@ -49,7 +49,9 @@ public class RegEmployeeSDAOImpl implements RegEmployeeDAO {
 				result = true;
 				
 			} else {
+				// if user alraedy regsterd
 				System.out.println("Employee already regitered");
+				System.out.println();
 			}
 
 		} catch (SQLException ex) {
@@ -208,23 +210,26 @@ public class RegEmployeeSDAOImpl implements RegEmployeeDAO {
 					+ " C.comp_desc Problem, E2.emp_name RaisedBy,"
 					+ " E.emp_name Engineer, C.closing_date closing,"
 					+ " C.Status Status FROM Complains C "
-					+ "INNER JOIN employees E ON C.assign_to = E.emp_id"
-					+ "INNER JOIN Employees E2 ON C.raised_by = E2.emp_id WHERE C.raised_by = ?";
+					+ " INNER JOIN employees E ON C.assign_to = E.emp_id"
+					+ " INNER JOIN Employees E2 ON C.raised_by = E2.emp_id WHERE C.raised_by = ?";
 			
 			prepStatment = connection.prepareStatement(SELECT_QUERY);
 			
+			System.out.println(prepStatment);
+			
 			prepStatment.setInt(1, LoggedINUser.loggedInUSerId);
-
+			
 			rs = prepStatment.executeQuery();
 			
 			if(!DbUtility.isResultSetEmpty(rs)) {
 				list = DbUtility.getAllCompliansFromResultSet(rs);
+				
 			}else {
 				SELECT_QUERY = "SELECT C.comp_id ID, C.reg_date Registered,"
 				+ " C.comp_desc Problem, E.emp_name RaisedBy,"
 				+ " C.assign_to Engineer, C.closing_date closing,"
 				+ " C.Status Status FROM Complains C INNER JOIN employees E "
-				+ "ON C.raised_by = E.emp_id WHERE C.raised_by = ? AND C.assign_to IS NULL";
+				+ " ON C.raised_by = E.emp_id WHERE C.raised_by = ? AND C.assign_to IS NULL";
 				
 				prepStatment = connection.prepareStatement(SELECT_QUERY);
 				

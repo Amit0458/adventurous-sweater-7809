@@ -36,6 +36,7 @@ public class EmployeeRegistrationUI {
 			confirmPassword = sc.next()+"";
 		}catch(InputMismatchException ex) {
 			System.out.println(ex);
+			registerEmployee();
 		}
 		if(password.equals(confirmPassword)) {
 			RegisterdEmployee newEmployee = new RegisteredEmployeeImpl();
@@ -49,11 +50,13 @@ public class EmployeeRegistrationUI {
 				System.out.println(LoggedINUser.getUserName(empID) + " Registered Succesfully, With usernmae : " + username + " and password : " + password);
 				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
 				}
+				Main.mainMenu();
 			}catch(SomeThingWrongException ex) {
 				System.out.println("User Name must be unique");
+				registerEmployee();
 			}
 		}else {
-			System.out.println("\tPlease check password");
+			System.out.println("Please check password");
 			registerEmployee();
 		}	
 	}

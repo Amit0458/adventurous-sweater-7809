@@ -27,6 +27,9 @@ public class EnginnerUI {
 		String password = sc.next();
 		try {
 			if(engineer.engineerLogin(username, password)) {
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
+				System.out.println("\t\t\t\t\tWelcome, " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + Main.grettingMsg()+"!\t\t\t\t\t|");
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
 				Main.EngineerMenu(sc);
 			}else {
 				System.out.println("Wrong Credentials");
@@ -42,6 +45,7 @@ public class EnginnerUI {
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			Main.EngineerMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -61,6 +65,7 @@ public class EnginnerUI {
 		try {
 			engineer.updateStatusOfComaplain(compID, status);
 			System.out.println("Status Updated");
+			Main.EngineerMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException| InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -72,6 +77,7 @@ public class EnginnerUI {
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			Main.EngineerMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -89,6 +95,7 @@ public class EnginnerUI {
 			try {
 				engineer.changePassword(username, olsPassword, newPassword);
 				System.out.println("Password changed Succesfully");
+				Main.EngineerMenu(sc);
 			}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 				System.out.println(ex);
 			}
