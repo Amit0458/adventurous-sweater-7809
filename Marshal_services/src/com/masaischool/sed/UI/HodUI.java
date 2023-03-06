@@ -29,6 +29,9 @@ public class HodUI {
 		String password = sc.next();
 		try {
 			if(HOD.hodLogin(username,password)) {
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
+				System.out.println("\t\t\t\t\tWelcome, " + LoggedINUser.getUserName(LoggedINUser.loggedInUSerId) + " " + Main.grettingMsg()+"!\t\t\t\t\t|");
+				System.out.println("+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=+");
 				Main.HodMenu(sc);
 			}else {
 				System.out.println("Wrong Credentials");
@@ -71,7 +74,7 @@ public class HodUI {
 			System.out.println("----------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("----------------------------------------------------------------------------------------------------------");
-
+			Main.HodMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -82,6 +85,7 @@ public class HodUI {
 			System.out.println("Enter Enginner Id");
 			HOD.deleteEnginner(sc.nextInt());
 			System.out.println("Enginner deleted Succesfully");
+			Main.HodMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -93,7 +97,7 @@ public class HodUI {
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
+			Main.HodMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException ex) {
 			System.out.println(ex);
 		}
@@ -105,6 +109,7 @@ public class HodUI {
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			list.forEach(System.out :: print);
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			Main.HodMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
@@ -120,6 +125,7 @@ public class HodUI {
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println("Enginner assigned, Complain Id : "+ compId +" Enginner : " + LoggedINUser.getUserName(enggId) + " Succesfully");
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			Main.HodMenu(sc);
 		}catch(SomeThingWrongException | NoRecordFoundException | InputMismatchException ex) {
 			System.out.println(ex);
 		}
