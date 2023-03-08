@@ -1,7 +1,9 @@
+# Online system hardware and software managment system 
 <p align="center">
   <img src="https://previews.123rf.com/images/anggar3ind/anggar3ind1612/anggar3ind161200299/68306128-computer-hardware-cartoon-illustration.jpg" width="950" height="500"alt="accessibility text">
 </p>
-Roles for the HOD:
+
+# Roles for the HOD:
 
 Login into the system 
 Register a new Engineer with a username(email) and password and the category.
@@ -10,7 +12,7 @@ Can Delete any Engineers from the system.
 Can able to see all the raised problem.
 Can assign any problem to any Engineer.
 
-Roles of Engineer:
+# Roles of Engineer:
 
 Each engineer has their own account by which they can login.
 Engineer can view the problem assigned to him by HOD .
@@ -18,7 +20,7 @@ Engineer can update the status of the problem addressed by him . i. e. whether i
 They can see list of all the problems attended by him/her.
 Engineer can change his password.
 
-Roles of Employee:
+# Roles of Employee:
 
 Employee can register himself with his username and password.
 Each employee has their account in the system with which they can login
