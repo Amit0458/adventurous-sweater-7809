@@ -1,12 +1,12 @@
 # Online system hardware and software managment system 
 <p align="center">
-  <img src="https://previews.123rf.com/images/anggar3ind/anggar3ind1612/anggar3ind161200299/68306128-computer-hardware-cartoon-illustration.jpg" width="950" height="500"alt="accessibility text">
+  <img src="https://previews.123rf.com/images/anggar3ind/anggar3ind1612/anggar3ind161200299/68306128-computer-hardware-cartoon-illustration.jpg" width="950" height="500" essibility text">
 </p>
 
 # Roles for the HOD:
 
-Login into the system 
-Register a new Engineer with a username(email) and password and the category.
+* Login into the system 
+Register a new Engineer with a username(email) and password and the category
 Can see List of all the Registered Engineers.
 Can Delete any Engineers from the system.
 Can able to see all the raised problem.
@@ -30,3 +30,6 @@ Employee can see the status of their problem by using complain id .
 Status means they can check who (engineer) is assigned to his problem.
 They can see all complain history raised by him/her.
 Employee can change his/her password.
+
+# ER diagram
+<img src = "https://github.com/Amit0458/adventurous-sweater-7809/blob/main/marshal%20services%20(1).png" alt="">
